@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  role      String   // AUTHORITY, FIELD_WORKER, VOLUNTEER
+  createdAt DateTime @default(now())
+}
+
+model Alert {
+  id          String   @id @default(uuid())
+  type        String
+  severity    String
+  location    String
+  district    String
+  state       String
+  latitude    Float
+  longitude   Float
+  issuedTime  DateTime
+  source      String
+  confidence  Int
+  freshness   String
+  status      String
+  createdAt   DateTime @default(now())
+}
+
+model Shelter {
+  id        String   @id @default(uuid())
+  name      String
+  capacity  Int
+  occupancy Int
+  latitude  Float
+  longitude Float
+  status    String
+  createdAt DateTime @default(now())
+}
+
+model Evidence {
+  id          String   @id @default(uuid())
+  source      String
+  sourceType  String
+  timestamp   DateTime
+  latitude    Float
+  longitude   Float
+  confidence  Int
+  reliability Int
+  freshness   String
+  claim       String
+  status      String
+  createdAt   DateTime @default(now())
+}
+
+model Recommendation {
+  id               String   @id @default(uuid())
+  action           String
+  target           String
+  reason           String
+  confidence       Int
+  requiredEvidence String
+  risk             String
+  status           String   // SAFE, CAUTION, BLOCKED
+  timestamp        DateTime @default(now())
+}
+
+// Minimal placeholder schema for hackathon prototype (add others as needed to avoid exceeding constraints).
+// Due to time constraints, many complex relationships are mocked in local DB.
+model FieldReport {
+  id        String   @id @default(uuid())
+  type      String
+  message   String
+  latitude  Float
+  longitude Float
+  timestamp DateTime @default(now())
+  status    String
+}
+
+model MissingCase {
+  id          String   @id @default(uuid())
+  personName  String
+  lastSeen    DateTime
+  latitude    Float
+  longitude   Float
+  status      String
+}

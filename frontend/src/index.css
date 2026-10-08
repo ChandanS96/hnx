@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #060b19; /* Very dark navy */
+    --foreground: #f8fafc;
+    --card: #0c1533;
+    --card-foreground: #f8fafc;
+    --border: #1e293b;
+    --primary: #06b6d4;
+    --primary-foreground: #020617;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Leaflet Map Customization for Dark Mode */
+.leaflet-container {
+  background-color: #0c1533 !important;
+}
+.leaflet-tile-pane {
+  filter: brightness(0.6) invert(1) contrast(1.2) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+.leaflet-control-attribution {
+  display: none !important;
+}
